@@ -9,7 +9,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       manifest: {
         name: 'Digital Ledger',
-        short_name: 'Ledger',
+        short_name: 'Digital Ledger',
         start_url: '/',
         display: 'standalone',
         background_color: '#ffffff',
