@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase, supabaseReady } from './lib/supabase.js'
 import BottomNav from './components/BottomNav.jsx'
+import PoweredBy from './components/PoweredBy.jsx'
 import Login from './screens/Login.jsx'
 import Home from './screens/Home.jsx'
 import Sell from './screens/Sell.jsx'
@@ -24,17 +25,27 @@ export default function App() {
     return () => sub.subscription.unsubscribe()
   }, [])
 
+  let content
   if (!supabaseReady) {
-    return <div className="screen"><h2>Setup needed</h2><p>The Supabase keys are missing in Vercel.</p></div>
+    content = <div className="screen"><h2>Setup needed</h2><p>The Supabase keys are missing in Vercel.</p></div>
+  } else if (loading) {
+    content = <div className="screen">Loading...</div>
+  } else if (!session) {
+    content = <Login />
+  } else {
+    const Screen = screens[tab]
+    content = (
+      <>
+        <Screen />
+        <BottomNav tab={tab} setTab={setTab} names={Object.keys(screens)} />
+      </>
+    )
   }
-  if (loading) return <div className="screen">Loading...</div>
-  if (!session) return <Login />
 
-  const Screen = screens[tab]
   return (
     <>
-      <Screen />
-      <BottomNav tab={tab} setTab={setTab} names={Object.keys(screens)} />
+      {content}
+      <PoweredBy />
     </>
   )
 }
