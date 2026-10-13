@@ -1,8 +1,11 @@
+import { supabase } from '../lib/supabase.js'
+
 export default function Home() {
   return (
     <div className="screen">
       <h2>Home</h2>
-      <p>Coming soon.</p>
+      <p>Today's summary will appear here.</p>
+      <button onClick={() => supabase.auth.signOut()}>Sign out</button>
     </div>
   )
 }
