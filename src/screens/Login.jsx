@@ -1,5 +1,4 @@
 import { supabase } from '../lib/supabase.js'
-import PoweredBy from '../components/PoweredBy.jsx'
 
 export default function Login() {
   async function signIn() {
@@ -14,7 +13,6 @@ export default function Login() {
       <h2>Digital Ledger</h2>
       <p>Sign in to continue.</p>
       <button onClick={signIn}>Sign in with your Google account</button>
-      <PoweredBy />
     </div>
   )
 }
